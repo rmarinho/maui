@@ -8,7 +8,7 @@
     <Nullable>enable</Nullable>
     <IsTrimmable>false</IsTrimmable>
     <MauiGenerateResourceDesigner>true</MauiGenerateResourceDesigner>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!--<GenerateDocumentationFile>true</GenerateDocumentationFile>-->
     <NoWarn>$(NoWarn);RS0041;RS0026;RS0027</NoWarn>
     <WarningsAsErrors>$(WarningsAsErrors);CS1591</WarningsAsErrors>
   </PropertyGroup>
@@ -100,7 +100,7 @@
 
   <Import Project="$(MauiSrcDirectory)Workload\Shared\LibraryPacks.targets" />
 
-  <Import Project="$(MauiSrcDirectory)PublicAPI.targets" />
+  <!--<Import Project="$(MauiSrcDirectory)PublicAPI.targets" />-->
 
   <Import Project="$(MauiRootDirectory)eng/ReplaceText.targets" />
 

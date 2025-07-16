@@ -1,6 +1,6 @@
 <Project>
 
-  <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+  <!-- <Import Project="Sdk.targets" Sdk="Microsoft.DotNet.Arcade.Sdk" /> -->
 
   <ItemGroup>
     <!-- Upgrade xunit's transitive NETStandard.Library dependency to avoid .NET Standard 1.x dependencies. -->
@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <Import Condition="'$(SampleProject)' != 'true'" Project="eng\Versions.targets" />
-  <Import Condition="'$(SampleProject)' != 'true' and '$(IsTestProject)' != 'true'" Project="eng\BannedApis.targets" />
-  <Import Project="eng\AndroidX.targets" />
-  <Import Project="eng\NuGetVersions.targets" />
+  <!-- <Import Condition="'$(SampleProject)' != 'true' and '$(IsTestProject)' != 'true'" Project="eng\BannedApis.targets" /> -->
+  <Import Project="$(MSBuildThisFileDirectory)\eng\AndroidX.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)\eng\NuGetVersions.targets" />
 
   <PropertyGroup>
     <!-- Allows for MAUI Xaml Hot Reload Samples to run without checks  -->

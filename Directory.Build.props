@@ -1,7 +1,7 @@
 <Project>
-  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
+  <!-- <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" /> -->
   <Import Condition="'$(EnvironmentBuildPropsImported)' != 'True'" Project="$(MSBuildThisFileDirectory)eng\Environment.Build.props" />
-
+  <Import Project="$(MSBuildThisFileDirectory)eng\Versions.props" />
   <PropertyGroup>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
@@ -12,7 +12,7 @@
     <MauiRootDirectory>$(MSBuildThisFileDirectory)</MauiRootDirectory>
     <MauiSrcDirectory>$(MSBuildThisFileDirectory)src/</MauiSrcDirectory>
     <IncludePreviousTfms>false</IncludePreviousTfms>
-    <IncludePreviousTfmsEssentials>false</IncludePreviousTfmsEssentials>
+    <IncludePreviousTfmsEssentials>true</IncludePreviousTfmsEssentials>
     <IncludePreviousTfmsGraphics>false</IncludePreviousTfmsGraphics>
   </PropertyGroup>
 
@@ -46,7 +46,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <_MauiDotNetVersionMajor Condition="'$(_MauiDotNetVersionMajor)' == ''">9</_MauiDotNetVersionMajor>
+    <_MauiDotNetVersionMajor Condition="'$(_MauiDotNetVersionMajor)' == ''">8</_MauiDotNetVersionMajor>
     <_MauiDotNetVersionMinor Condition="'$(_MauiDotNetVersionMinor)' == ''">0</_MauiDotNetVersionMinor>
     <_MauiDotNetVersion Condition="'$(_MauiDotNetVersion)' == ''">$(_MauiDotNetVersionMajor).$(_MauiDotNetVersionMinor)</_MauiDotNetVersion>
     <_MauiDotNetTfm Condition="'$(_MauiDotNetTfm)' == ''">net$(_MauiDotNetVersion)</_MauiDotNetTfm>
@@ -105,11 +105,11 @@
     <DotNetTizenWorkloadIsInstalled Condition="Exists('$(DotNetWorkloadPacksInstallLocation)Samsung.Tizen.Sdk\$(DotNetTizenWorkloadInstalledVersion)\Sdk\AutoImport.props')">true</DotNetTizenWorkloadIsInstalled>
 
     <IncludeWindowsTargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) or '$(Packing)' == 'true'">true</IncludeWindowsTargetFrameworks>
-    <IncludeMacOSTargetFrameworks Condition="'$(DotNetMacOSWorkloadIsInstalled)' == 'true'">true</IncludeMacOSTargetFrameworks>
-    <IncludeTizenTargetFrameworks Condition="'$(DotNetTizenWorkloadIsInstalled)' == 'true'">true</IncludeTizenTargetFrameworks>
-    <IncludeAndroidTargetFrameworks>true</IncludeAndroidTargetFrameworks>
-    <IncludeMacCatalystTargetFrameworks>true</IncludeMacCatalystTargetFrameworks>
-    <IncludeIosTargetFrameworks>true</IncludeIosTargetFrameworks>
+    <IncludeMacOSTargetFrameworks Condition="'$(DotNetMacOSWorkloadIsInstalled)' == 'true'">false</IncludeMacOSTargetFrameworks>
+    <IncludeTizenTargetFrameworks Condition="'$(DotNetTizenWorkloadIsInstalled)' == 'true'">false</IncludeTizenTargetFrameworks>
+    <IncludeAndroidTargetFrameworks>false</IncludeAndroidTargetFrameworks>
+    <IncludeMacCatalystTargetFrameworks>false</IncludeMacCatalystTargetFrameworks>
+    <IncludeIosTargetFrameworks>false</IncludeIosTargetFrameworks>
     <IncludeCompatibilityProjects>false</IncludeCompatibilityProjects>
     <IncludeCompatibilityProjects Condition="'$(SolutionFileName)' == 'Microsoft.Maui.sln'">true</IncludeCompatibilityProjects>
   </PropertyGroup>
@@ -118,11 +118,11 @@
   <PropertyGroup Condition="('$(CI)' == 'true' or '$(TF_BUILD)' == 'true') and ('$(BuildTaskOnlyBuild)' != 'true')">
     <IncludeWindowsTargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">true</IncludeWindowsTargetFrameworks>
     <!-- Disabled until net9.0-tizen is available -->
-    <IncludeTizenTargetFrameworks>true</IncludeTizenTargetFrameworks>
-    <IncludeMacOSTargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">true</IncludeMacOSTargetFrameworks>
+    <IncludeTizenTargetFrameworks>false</IncludeTizenTargetFrameworks>
+    <IncludeMacOSTargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">false</IncludeMacOSTargetFrameworks>
     <IncludeAndroidTargetFrameworks>true</IncludeAndroidTargetFrameworks>
-    <IncludeMacCatalystTargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">true</IncludeMacCatalystTargetFrameworks>
-    <IncludeIosTargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">true</IncludeIosTargetFrameworks>
+    <IncludeMacCatalystTargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">false</IncludeMacCatalystTargetFrameworks>
+    <IncludeIosTargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">false</IncludeIosTargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -160,11 +160,11 @@
     <Windows2TargetFrameworkVersion>10.0.20348.0</Windows2TargetFrameworkVersion>
     <TizenTargetFrameworkVersion>7.0</TizenTargetFrameworkVersion>
     <!-- Previous .NET -->
-    <IosPreviousTargetFrameworkVersion>17.5</IosPreviousTargetFrameworkVersion>
-    <TvosPreviousTargetFrameworkVersion>17.5</TvosPreviousTargetFrameworkVersion>
-    <MacCatalystPreviousTargetFrameworkVersion>17.5</MacCatalystPreviousTargetFrameworkVersion>
-    <MacosPreviousTargetFrameworkVersion>14.5</MacosPreviousTargetFrameworkVersion>
-    <AndroidPreviousTargetFrameworkVersion>35.0</AndroidPreviousTargetFrameworkVersion>
+    <IosPreviousTargetFrameworkVersion>17.0</IosPreviousTargetFrameworkVersion>
+    <TvosPreviousTargetFrameworkVersion>17.0</TvosPreviousTargetFrameworkVersion>
+    <MacCatalystPreviousTargetFrameworkVersion>17.0</MacCatalystPreviousTargetFrameworkVersion>
+    <MacosPreviousTargetFrameworkVersion>14.0</MacosPreviousTargetFrameworkVersion>
+    <AndroidPreviousTargetFrameworkVersion>34.0</AndroidPreviousTargetFrameworkVersion>
     <WindowsPreviousTargetFrameworkVersion>10.0.19041.0</WindowsPreviousTargetFrameworkVersion>
     <Windows2PreviousTargetFrameworkVersion>10.0.20348.0</Windows2PreviousTargetFrameworkVersion>
     <TizenPreviousTargetFrameworkVersion>7.0</TizenPreviousTargetFrameworkVersion>
