@@ -100,7 +100,7 @@
 
   <Import Project="$(MauiSrcDirectory)Workload\Shared\LibraryPacks.targets" />
 
-  <!--<Import Project="$(MauiSrcDirectory)PublicAPI.targets" />-->
+  <Import Project="$(MauiSrcDirectory)PublicAPI.targets" />
 
   <Import Project="$(MauiRootDirectory)eng/ReplaceText.targets" />
 

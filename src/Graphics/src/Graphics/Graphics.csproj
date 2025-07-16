@@ -36,8 +36,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <PackageReference Include="Microsoft.Graphics.Win2D" />
-    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" />
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.3.2" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="3.0.1"  />
   </ItemGroup>
 
   <PropertyGroup>
@@ -46,6 +46,6 @@
 
   <Import Project="$(MauiSrcDirectory)Workload\Shared\LibraryPacks.targets" />
 
-  <!--<Import Project="$(MauiSrcDirectory)PublicAPI.targets" />-->
+  <Import Project="$(MauiSrcDirectory)PublicAPI.targets" />
 
 </Project>

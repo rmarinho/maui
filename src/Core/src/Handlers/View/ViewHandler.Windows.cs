@@ -14,8 +14,8 @@ namespace Microsoft.Maui.Handlers
 
 		static ViewHandler()
 		{
-			FocusManager.GotFocus += FocusManager_GotFocus;
-			FocusManager.LostFocus += FocusManager_LostFocus;
+			//FocusManager.GotFocus += FocusManager_GotFocus;
+			//FocusManager.LostFocus += FocusManager_LostFocus;
 		}
 
 		partial void ConnectingHandler(PlatformView? platformView)
