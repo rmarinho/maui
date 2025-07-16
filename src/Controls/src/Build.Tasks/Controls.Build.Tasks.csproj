@@ -12,7 +12,7 @@
 		<!-- Make sure to copy all the NuGet files into the build output -->
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 		<!-- ILRepack this assembly and add a strong name and version -->
-		<ILRepackBeforePack>true</ILRepackBeforePack>
+		<ILRepackBeforePack>false</ILRepackBeforePack>
 	</PropertyGroup>
 
 	<PropertyGroup>
