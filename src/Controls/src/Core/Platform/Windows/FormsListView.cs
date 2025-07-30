@@ -39,6 +39,12 @@ namespace Microsoft.Maui.Controls.Platform
 			}
 		}
 
+		protected override global::Windows.Foundation.Size MeasureOverride(global::Windows.Foundation.Size availableSize)
+		{
+			//return availableSize;
+			return base.MeasureOverride(availableSize);
+		}
+
 		public WVisibility EmptyViewVisibility
 		{
 			get

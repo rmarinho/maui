@@ -67,7 +67,7 @@ namespace Microsoft.Maui.Hosting
 						return;
 
 					// WinUI
-				//	resources.AddLibraryResources<UI.Xaml.Controls.XamlControlsResources>();
+					resources.AddLibraryResources<UI.Xaml.Controls.XamlControlsResources>();
 
 					// Microsoft.Maui
 					resources.AddLibraryResources("MicrosoftMauiCoreIncluded", "ms-appx:///Microsoft.Maui/Platform/Windows/Styles/Resources.xbf");
