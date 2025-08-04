@@ -166,13 +166,21 @@ namespace Microsoft.Maui
 			{
 				var fontUri = new Uri(fontFile, UriKind.RelativeOrAbsolute);
 
+				if(!fontUri.IsAbsoluteUri)
+				{
+					return null;
+					// If the font URI is not absolute, it is likely a relative path.
+					// We need to resolve it to an absolute path.
+					//fontUri = new Uri(Path.Combine(FileSystem.AppDataDirectory, fontUri.OriginalString), UriKind.Absolute);
+				}
 				// Win2D in unpackaged apps can't load files using packaged schemes, such as `ms-appx://`
 				// so we have to first convert it to a `file://` scheme will the full file path.
 				// At this part of the load operation, the font URI does NOT yet have the font family name
 				// fragment component, so we don't have to remove it.
-				if (!AppInfoUtils.IsPackagedApp)
+				if (!AppInfoUtils.IsPackagedApp && fontUri.IsAbsoluteUri)
 				{
 					var path = fontUri.LocalPath.TrimStart('/');
+					
 					if (FileSystemUtils.TryGetAppPackageFileUri(path, out var uri))
 						fontUri = new Uri(uri, UriKind.RelativeOrAbsolute);
 				}
