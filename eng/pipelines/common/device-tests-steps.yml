@@ -107,10 +107,10 @@ steps:
         PRIVATE_BUILD: $(PrivateBuild)
 
   # Run the build for .NET MAUI on this machine
-  # - ${{ else }}:
+  - ${{ else }}:
 
-    # - script: dotnet cake --target=dotnet-buildtasks --configuration="Release"
-    #   displayName: 'Build the MSBuild Tasks'
+    - script: dotnet cake --target=dotnet-buildtasks --configuration="Release"
+      displayName: 'Build the MSBuild Tasks'
 
 ##################################################
 #                  Prepare Run                   #
