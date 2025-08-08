@@ -10,7 +10,7 @@ jobs:
   analyze-build:
     name: Analyze Build
     runs-on: ubuntu-latest
-
+  
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,3 +19,29 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
+
+      - name: Get logs from check runs
+        if: ${{ github.event_name == 'check_run' || github.event_name == 'check_suite' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            
+            // Create logs directory
+            fs.mkdirSync('logs', { recursive: true });
+            
+            const check_run_id = context.payload.check_run?.id || context.payload.check_suite?.check_runs[0]?.id;
+            if (check_run_id) {
+              const check_run = await github.rest.checks.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                check_run_id: check_run_id
+              });
+              
+              // Save the check run output
+              if (check_run.data.output && check_run.data.output.text) {
+                fs.writeFileSync('logs/check_run_output.log', check_run.data.output.text);
+                console.log('Saved check run output to logs/check_run_output.log');
+              }
+            }
+      
