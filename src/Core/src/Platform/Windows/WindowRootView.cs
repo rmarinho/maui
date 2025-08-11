@@ -146,7 +146,7 @@ namespace Microsoft.Maui.Platform
 
 			AppTitleBarContainer = (FrameworkElement)GetTemplateChild("AppTitleBarContainer");
 			AppTitleBarContentControl = (ContentControl?)GetTemplateChild("AppTitleBarContentControl") ??
-				AppTitleBarContainer.GetDescendantByName<ContentControl>("AppTitleBarContentControl");
+				AppTitleBarContainer?.GetDescendantByName<ContentControl>("AppTitleBarContentControl");
 
 			if (AppTitleBarContentControl != null)
 			{
@@ -154,7 +154,11 @@ namespace Microsoft.Maui.Platform
 			}
 			else
 			{
-				AppTitleBarContainer.Loaded += OnAppTitleBarContainerLoaded;
+				if (AppTitleBarContainer is not null)
+				{
+
+					AppTitleBarContainer.Loaded += OnAppTitleBarContainerLoaded;
+				}
 			}
 
 			OnApplyTemplateFinished?.Invoke(this, EventArgs.Empty);
