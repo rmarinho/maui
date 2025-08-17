@@ -70,7 +70,7 @@ namespace Microsoft.Maui.Hosting
 					resources.AddLibraryResources<UI.Xaml.Controls.XamlControlsResources>();
 
 					// Microsoft.Maui
-					resources.AddLibraryResources("MicrosoftMauiCoreIncluded", "ms-appx:///Microsoft.Maui/Platform/Windows/Styles/Resources.xbf");
+				//	resources.AddLibraryResources("MicrosoftMauiCoreIncluded", "ms-appx:///Microsoft.Maui/Platform/Windows/Styles/Resources.xbf");
 				}
 #endif
 			}
