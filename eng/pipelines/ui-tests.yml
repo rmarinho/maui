@@ -61,6 +61,11 @@ parameters:
     type: boolean
     default: false
 
+  - name: RunNativeAOT
+    displayName: 'Run NativeAOT UITests'
+    type: boolean
+    default: false
+
   - name: CompatibilityTests
     type: boolean
     default: false
@@ -148,6 +153,7 @@ stages:
       androidCompatibilityPool: ${{ parameters.androidCompatibilityPool }}
       iosCompatibilityPool: ${{ parameters.iosCompatibilityPool }}
       agentPoolAccessToken: $(AgentPoolAccessToken)
+      RunNativeAOT: ${{ parameters.RunNativeAOT }}
       ${{ if or(parameters.BuildEverything, and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'devdiv'))) }}:
         androidApiLevels: [ 30 ]
         iosVersions: [ '18.0' ]

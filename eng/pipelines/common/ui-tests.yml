@@ -11,6 +11,7 @@ parameters:
   timeoutInMinutes: 120
   skipProvisioning: true
   agentPoolAccessToken: ''
+  RunNativeAOT: false
   categoryGroupsToTest:
     # Make sure that this list is always up-to-date with src/Controls/tests/TestCases.Shared.Tests/UITestCategories.cs
     # we might want to improve this somehow depending on how much the categories change over time
@@ -59,7 +60,13 @@ stages:
                 runtimeVariant: "Mono"
                 skipProvisioning: ${{ parameters.skipProvisioning }}
   
-  - ${{ if or(parameters.BuildEverything, and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'devdiv'))) }}:
+  # NativeAOT UITests Build Stage
+  # Runs if any of the following conditions are met:
+  # 1. BuildEverything parameter is set to true
+  # 2. RunNativeAOT parameter is explicitly set to true  
+  # 3. Running on DevDiv (non-PR builds only)
+  # If none of these conditions are met, NativeAOT UITests are skipped to reduce build time and resource usage
+  - ${{ if or(parameters.BuildEverything, parameters.RunNativeAOT, and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'devdiv'))) }}:
     - stage: build_ui_tests_nativeaot
       displayName: Build UITests Sample App NativeAOT
       dependsOn: []
@@ -248,7 +255,13 @@ stages:
                       testConfigurationArgs: "CollectionView2"
                       skipProvisioning: ${{ parameters.skipProvisioning }}
 
-  - ${{ if or(parameters.BuildEverything, and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'devdiv'))) }}:
+  # NativeAOT UITests Execution Stage  
+  # Runs if any of the following conditions are met:
+  # 1. BuildEverything parameter is set to true
+  # 2. RunNativeAOT parameter is explicitly set to true
+  # 3. Running on DevDiv (non-PR builds only)
+  # This stage depends on the NativeAOT build stage and executes the actual UI tests using NativeAOT runtime
+  - ${{ if or(parameters.BuildEverything, parameters.RunNativeAOT, and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'devdiv'))) }}:
     - stage: ios_ui_tests_nativeaot
       displayName: iOS UITests NativeAOT
       dependsOn: build_ui_tests_nativeaot
