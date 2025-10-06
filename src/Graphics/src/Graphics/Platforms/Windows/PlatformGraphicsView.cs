@@ -38,8 +38,8 @@ namespace Microsoft.Maui.Graphics.Platform
 		{
 			_canvas = new PlatformCanvas();
 
-			Loaded += UserControl_Loaded;
-			Unloaded += UserControl_Unloaded;
+			//Loaded += UserControl_Loaded;
+			//Unloaded += UserControl_Unloaded;
 		}
 
 		public IDrawable Drawable
