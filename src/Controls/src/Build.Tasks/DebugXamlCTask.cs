@@ -11,7 +11,7 @@ namespace Microsoft.Maui.Controls.Build.Tasks
 {
 	public class DebugXamlCTask : XamlTask
 	{
-		readonly XamlCache cache = new();
+	//	readonly XamlCache cache = new();
 
 		public override bool Execute(out IList<Exception> thrownExceptions)
 		{
