@@ -1,9 +1,8 @@
 <Project>
-  <!-- <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" /> -->
+  <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
   <Import Condition="'$(EnvironmentBuildPropsImported)' != 'True'" Project="$(MSBuildThisFileDirectory)eng\Environment.Build.props" />
-  <Import Project="$(MSBuildThisFileDirectory)eng\Versions.props" />
+
   <PropertyGroup>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <LangVersion>Latest</LangVersion>
