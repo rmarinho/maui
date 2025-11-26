@@ -10,6 +10,7 @@ var vsVersion = GetBuildVariable("VS", "");
 string MSBuildExe = Argument("msbuild", EnvironmentVariable("MSBUILD_EXE", ""));
 string nugetSource = Argument("nugetsource", "");
 string officialBuildId = Argument("officialbuildid", "");
+string versionId = Argument("versionid", "99.99.0");
 
 string testFilter = Argument("test-filter", EnvironmentVariable("TEST_FILTER"));
 
@@ -302,6 +303,7 @@ Task("dotnet-pack-maui")
         {
             { "SymbolPackageFormat", "snupkg" },
             { "OfficialBuildId", officialBuildId },
+            { "PackageVersion", versionId },
         });
     });
 
